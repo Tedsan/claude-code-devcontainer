@@ -75,9 +75,3 @@ black .
 - `requirements.txt` - Python 依存関係の追加
 - `.devcontainer/devcontainer.json` - VS Code 設定や拡張機能
 - `.devcontainer/Dockerfile` - システムレベルの依存関係
-
-## 注意事項
-
-- このプロジェクトは開発環境のみを提供します
-- 実際の開発作業は `/workspaces/daily-topic` ディレクトリで行ってください
-- コンテナ外からのファイルアクセスは制限される場合があります
