@@ -73,6 +73,11 @@ pytest
 black .
 ```
 
+## Claude Code の設定・認証情報の保持
+
+`~/.claude`（`/home/vscode/.claude`）は名前付きボリューム `claude-code-config-${devcontainerId}` にマウントしているため、Rebuild してもログイン状態や設定が残ります。`CLAUDE_CONFIG_DIR` もこのディレクトリを指すように設定しています。
+ログイン情報を完全に消したい場合は、Docker 側でこのボリュームを削除してください。
+
 ## ポートフォワーディング
 
 以下のポートが自動的にフォワードされます：
