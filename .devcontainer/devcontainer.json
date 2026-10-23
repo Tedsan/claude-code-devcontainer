@@ -1,6 +1,9 @@
 {
   "name": "Python Claude Code Development",
-  "dockerFile": "Dockerfile",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -17,12 +20,10 @@
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python",
-        "python.formatting.provider": "black",
-        "python.linting.enabled": true,
-        "python.linting.pylintEnabled": false,
-        "python.linting.flake8Enabled": true,
-        "python.linting.mypyEnabled": true,
-        "editor.formatOnSave": true,
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter",
+          "editor.formatOnSave": true
+        },
         "editor.codeActionsOnSave": {
           "source.organizeImports": true
         },
@@ -31,6 +32,12 @@
     }
   },
   "forwardPorts": [8000, 8080, 3000],
-  "postCreateCommand": "pip install --upgrade pip && pip install -r requirements.txt",
+  "mounts": [
+    "source=claude-code-config-${devcontainerId},target=/home/vscode/.claude,type=volume"
+  ],
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
+  },
+  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.claude && pip install --upgrade pip && pip install -r requirements.txt",
   "remoteUser": "vscode"
 }

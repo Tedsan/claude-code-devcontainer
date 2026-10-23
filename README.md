@@ -31,9 +31,18 @@
 - **Ruff** - 高速リンター
 - **pytest** - テストフレームワーク
 
+## 前提条件
+
+- Docker（Docker Desktop など）が起動していること
+- VS Code と [Dev Containers 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)（`ms-vscode-remote.remote-containers`）
+
 ## 使用方法
 
 ### 1. devcontainer で開く
+```bash
+git clone https://github.com/Tedsan/claude-code-devcontainer && code claude-code-devcontainer
+```
+
 1. VS Code で このプロジェクトを開く
 2. コマンドパレット (`Ctrl+Shift+P`) から「Dev Containers: Reopen in Container」を選択
 3. コンテナのビルドと起動を待つ
@@ -41,11 +50,13 @@
 ### 2. Claude Code CLI の使用
 ```bash
 # Claude Code CLI のヘルプを表示
-claude-code --help
+claude --help
 
 # Claude Code を起動
-claude-code
+claude
 ```
+
+初回起動時はブラウザでのログインが必要です。コンテナ内ではログイン後のコールバックが戻ってこない場合があるので、その場合はブラウザに表示されたコードをターミナルに貼り付けてください。
 
 ### 3. Python 開発
 ```bash
@@ -61,6 +72,11 @@ pytest
 # コードフォーマット
 black .
 ```
+
+## Claude Code の設定・認証情報の保持
+
+`~/.claude`（`/home/vscode/.claude`）は名前付きボリューム `claude-code-config-${devcontainerId}` にマウントしているため、Rebuild してもログイン状態や設定が残ります。`CLAUDE_CONFIG_DIR` もこのディレクトリを指すように設定しています。
+ログイン情報を完全に消したい場合は、Docker 側でこのボリュームを削除してください。
 
 ## ポートフォワーディング
 
