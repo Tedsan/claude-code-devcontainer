@@ -1,0 +1,8 @@
+# Build context is the repository root (devcontainer.json "build.context": "..").
+# Keep VCS data and secrets out of the image build context.
+.git
+.env
+.env.*
+.mcp.json
+.venv
+**/__pycache__

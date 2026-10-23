@@ -25,7 +25,7 @@ RUN touch /tmp/requirements.txt
 # Set working directory
 WORKDIR /workspace
 
-# Copy requirements if exists
+# Copy requirements if exists (build context is the repository root; see devcontainer.json "build.context")
 COPY requirements.txt* ./
 
 # Install Python dependencies
